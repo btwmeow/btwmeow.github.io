@@ -412,3 +412,116 @@ a.btn-back:hover {
     color: var(--accent-hover);
     font-style: normal;
 }
+
+/* Сетка для карточек дресс-кода */
+.dresscode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.dresscode-grid.single-item {
+    max-width: 400px;
+}
+
+/* Карточка одежды */
+.dresscode-card {
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.dresscode-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-3px);
+}
+
+/* Изображения */
+.dresscode-img {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+/* Подпись под изображением */
+.dresscode-label {
+    display: block;
+    margin-top: 0.75rem;
+    font-weight: bold;
+    color: var(--accent-gold);
+    font-size: 0.95rem;
+}
+
+/* Указатель при наведении на изображение */
+.dresscode-img {
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.dresscode-img:hover {
+    filter: brightness(1.1);
+}
+
+/* Модальное окно просмотра картинок */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 6px;
+    border: 2px solid var(--accent-gold);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+    object-fit: contain;
+}
+
+.modal-caption {
+    margin-top: 15px;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: var(--accent-gold);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

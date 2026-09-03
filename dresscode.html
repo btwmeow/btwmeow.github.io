@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дресс-код — ВК ВС РО</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <h1 class="site-title">Военный Комиссариат ВС РО</h1>
+        <p class="site-subtitle">Официальный служебный дресс-код подразделения</p>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <article class="content-block">
+            <h2 class="page-title">РЕГЛАМЕНТ ФОРМЫ ОДЕЖДЫ (ДРЕСС-КОД)</h2>
+
+            <div class="content-text">
+
+                <!-- Старший состав -->
+                <section class="step-section">
+                    <h3 class="step-title">Старший состав подразделения (13+ ранг)</h3>
+                    <div class="dresscode-grid">
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/highstuff.png" alt="Мужская форма старшего состава" class="dresscode-img">
+                            <span class="dresscode-label">Мужская форма</span>
+                        </div>
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/highstuff_female.png" alt="Женская форма старшего состава" class="dresscode-img">
+                            <span class="dresscode-label">Женская форма</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Средний состав -->
+                <section class="step-section">
+                    <h3 class="step-title">Средний состав (6–12 ранг)</h3>
+                    <div class="dresscode-grid">
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/midstuff.png" alt="Мужская форма среднего состава" class="dresscode-img">
+                            <span class="dresscode-label">Мужская форма</span>
+                        </div>
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/midstuff_female.png" alt="Женская форма среднего состава" class="dresscode-img">
+                            <span class="dresscode-label">Женская форма</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Младший состав -->
+                <section class="step-section">
+                    <h3 class="step-title">Младший состав (3–6 ранг)</h3>
+                    <div class="dresscode-grid">
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/lowstuff.png" alt="Мужская форма младшего состава" class="dresscode-img">
+                            <span class="dresscode-label">Мужская форма</span>
+                        </div>
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/lowstuff_female.png" alt="Женская форма младшего состава" class="dresscode-img">
+                            <span class="dresscode-label">Женская форма</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Мероприятия -->
+                <section class="step-section">
+                    <h3 class="step-title-warning">Форма для глобальных мероприятий (3–13+ ранг)</h3>
+                    <div class="dresscode-grid single-item">
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/mp.png" alt="Форма для ГМП" class="dresscode-img">
+                            <span class="dresscode-label">Комплект для мероприятий</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Полевая форма -->
+                <section class="step-section">
+                    <h3 class="step-title-warning">Полевая форма ВА (3–13+ ранг)</h3>
+                    <div class="dresscode-grid single-item">
+                        <div class="dresscode-card">
+                            <img src="./files/pictures/polev.png" alt="Полевая форма ВА" class="dresscode-img">
+                            <span class="dresscode-label">Полевой комплект</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </article>
+
+        <!-- Кнопка возврата -->
+        <div class="btn-back-wrapper">
+            <a href="index.html" class="btn-back">&larr; Вернуться на главную</a>
+        </div>
+    </main>
+
+    <!-- Модальное окно для полноэкранного просмотра -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImg" alt="Полноэкранный просмотр">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; Вооружённые Силы РО. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт для открытия модального окна -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeBtn = document.getElementsByClassName('modal-close')[0];
+            const images = document.querySelectorAll('.dresscode-img');
+
+            images.forEach(img => {
+                img.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                    modalImg.src = img.src;
+                    const label = img.nextElementSibling ? img.nextElementSibling.innerText : '';
+                    modalCaption.innerText = img.alt + (label ? ` (${label})` : '');
+                });
+            });
+
+            const closeModal = () => {
+                modal.style.display = 'none';
+            };
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
