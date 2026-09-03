@@ -5,164 +5,369 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Система повышения ВК — ВК ВС РО</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для переключателя подразделений */
+        .dept-toggle-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-toggle {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--text-primary, #ffffff);
+            background-color: var(--card-bg, #1e1e1e);
+            border: 2px solid var(--accent-gold, #d4af37);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-toggle:hover {
+            background-color: var(--accent-gold, #d4af37);
+            color: #000000;
+        }
+
+        .btn-toggle.active {
+            background-color: var(--accent-gold, #d4af37);
+            color: #000000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Управление видимостью блоков */
+        .dept-content {
+            display: none;
+        }
+
+        .dept-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Шапка сайта -->
     <header class="site-header">
         <h1 class="site-title">Военный Комиссариат ВС РО</h1>
-        <p class="site-subtitle">Система повышения и регламент баллов Военного Комиссариатa</p>
+        <p class="site-subtitle">Система повышения и регламент баллов Военного Комиссариата</p>
     </header>
 
+    <!-- Основной контент -->
     <main class="container">
+
+        <!-- Кнопки переключения подразделений -->
+        <div class="dept-toggle-wrapper">
+            <button class="btn-toggle active" onclick="switchDept('ok')">Отдел Кадров (ОК)</button>
+            <button class="btn-toggle" onclick="switchDept('rmp')">Инструкторы РМП</button>
+        </div>
+
         <div class="promotion-layout">
             
+            <!-- Основной блок требований по рангам -->
             <section class="promotion-main">
                 <article class="content-block">
-                    <h2 class="page-title">ТРЕБОВАНИЯ ДЛЯ ПОВЫШЕНИЯ СОСТАВА ВК</h2>
                     
-                    <div class="content-text">
+                    <!-- ТРЕБОВАНИЯ ДЛЯ ОТДЕЛА КАДРОВ (ОК) -->
+                    <div id="ok-requirements" class="dept-content active">
+                        <h2 class="page-title">ТРЕБОВАНИЯ ДЛЯ ПОВЫШЕНИЯ — ОТДЕЛ КАДРОВ (ОК)</h2>
+                        <div class="content-text">
 
-                        <!-- 3 -> 4 -->
-                        <div class="rank-card">
-                            <p class="rank-title">3 &rarr; 4 ранг (Сержант)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 80 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Проверка РМП / КМБ — 5 раз</li>
-                                <li>Лекция / экскурсия ВЧ — 2 раза</li>
-                            </ul>
+                            <!-- 3 -> 4 -->
+                            <div class="rank-card">
+                                <p class="rank-title">3 &rarr; 4 ранг (Сержант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 80 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Помощь на призыве — 2 раза</li>
+                                </ul>
+                            </div>
+
+                            <!-- 4 -> 5 -->
+                            <div class="rank-card">
+                                <p class="rank-title">4 &rarr; 5 ранг (Старший сержант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 120 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Помощь на призыве — 4 раза</li>
+                                </ul>
+                            </div>
+
+                            <!-- 5 -> 6 -->
+                            <div class="rank-card">
+                                <p class="rank-title">5 &rarr; 6 ранг (Старшина)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 170 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Помощь на призыве — 6 раз</li>
+                                    <li>Проверка рапортов на увольнение — 3 раза</li>
+                                </ul>
+                            </div>
+
+                            <!-- 6 -> 7 -->
+                            <div class="rank-card">
+                                <p class="rank-title">6 &rarr; 7 ранг (Прапорщик)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 230 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Помощь на призыве — 8 раз</li>
+                                    <li>Проверка отчетов ВК — 5 раз</li>
+                                    <li>Спец. операции (Поставка/Рейд/ВЗА) — 1 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 7 -> 8 -->
+                            <div class="rank-card">
+                                <p class="rank-title">7 &rarr; 8 ранг (Старший прапорщик)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 300 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Помощь на призыве — 10 раз</li>
+                                    <li>Проверка отчетов ВК — 8 раз</li>
+                                    <li>Проверка рапортов на увольнение — 5 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 8 -> 9 -->
+                            <div class="rank-card">
+                                <p class="rank-title">8 &rarr; 9 ранг (Младший лейтенант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 380 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Пройти внутренний экзамен на знание правил приёма и кадрового аудита</li>
+                                    <li>Помощь на призыве — 12 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 9 -> 10 -->
+                            <div class="rank-card">
+                                <p class="rank-title">9 &rarr; 10 ранг (Лейтенант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 450 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Принятие во фракцию — 20 раз</li>
+                                    <li>Помощь на призыве — 10 раз (или Проведение призыва — 3 раза)</li>
+                                </ul>
+                            </div>
+
+                            <!-- 10 -> 11 -->
+                            <div class="rank-card">
+                                <p class="rank-title">10 &rarr; 11 ранг (Старший лейтенант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 550 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Принятие во фракцию — 25 раз</li>
+                                    <li>Помощь на призыве — 15 раз</li>
+                                    <li>Активная еженедельная отчётность по работе младшего состава ВК</li>
+                                </ul>
+                            </div>
+
+                            <!-- 11 -> 12 -->
+                            <div class="rank-card rank-card-danger">
+                                <p class="rank-title-danger">11 &rarr; 12 ранг (Капитан)</p>
+                                <p><strong>Повышение:</strong> На усмотрение руководящего состава (при наличии свободных мест).</p>
+                                <p><strong>Условия:</strong> Стабильный онлайн, активная помощь составу.</p>
+                            </div>
+
+                            <!-- 12 -> 13+ -->
+                            <div class="rank-card rank-card-danger" style="margin-bottom: 0;">
+                                <p class="rank-title-danger">12 &rarr; 13+ ранг (Майор / Старший состав)</p>
+                                <p><strong>Повышение:</strong> На усмотрение руководящего состава (при наличии свободных мест).</p>
+                            </div>
+
                         </div>
-
-                        <!-- 4 -> 5 -->
-                        <div class="rank-card">
-                            <p class="rank-title">4 &rarr; 5 ранг (Старший сержант)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 120 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Проверка РМП / КМБ — 10 раз</li>
-                                <li>Принятие присяги — 3 раза</li>
-                                <li>Проведение тренировки — 2 раза</li>
-                            </ul>
-                        </div>
-
-                        <!-- 5 -> 6 -->
-                        <div class="rank-card">
-                            <p class="rank-title">5 &rarr; 6 ранг (Старшина)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 170 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Проверка РМП / КМБ — 15 раз</li>
-                                <li>Принятие присяги — 5 раз</li>
-                                <li>Помощь на призыве — 2 раза</li>
-                            </ul>
-                        </div>
-
-                        <!-- 6 -> 7 -->
-                        <div class="rank-card">
-                            <p class="rank-title">6 &rarr; 7 ранг (Прапорщик)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 230 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Проверка РМП / КМБ — 20 раз</li>
-                                <li>Принятие присяги — 8 раз</li>
-                                <li>Помощь на призыве — 3 раза</li>
-                                <li>Спец. операции (Поставка/Рейд/ВЗА) — 1 раз</li>
-                            </ul>
-                        </div>
-
-                        <!-- 7 -> 8 -->
-                        <div class="rank-card">
-                            <p class="rank-title">7 &rarr; 8 ранг (Старший прапорщик)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 300 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Проверка РМП / КМБ — 25 раз</li>
-                                <li>Принятие присяги — 12 раз</li>
-                                <li>Помощь на призыве — 5 раз</li>
-                                <li>Проведение тренировки / Лекция / экскурсия ВЧ — 5 раз</li>
-                            </ul>
-                        </div>
-
-                        <!-- 8 -> 9 -->
-                        <div class="rank-card">
-                            <p class="rank-title">8 &rarr; 9 ранг (Младший лейтенант)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 380 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Пройти внутренний экзамен на знание правил приёма и кадрового аудита</li>
-                                <li>Принятие присяги — 15 раз</li>
-                                <li>Помощь на призыве — 7 раз</li>
-                            </ul>
-                        </div>
-
-                        <!-- 9 -> 10 -->
-                        <div class="rank-card">
-                            <p class="rank-title">9 &rarr; 10 ранг (Лейтенант)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 450 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Принятие во фракцию — 20 раз</li>
-                                <li>Помощь на призыве — 10 раз (или Проведение призыва — 3 раза)</li>
-                                <li>Проведение тренировки — 5 раз</li>
-                            </ul>
-                        </div>
-
-                        <!-- 10 -> 11 -->
-                        <div class="rank-card">
-                            <p class="rank-title">10 &rarr; 11 ранг (Старший лейтенант)</p>
-                            <p><strong>Необходимое количество баллов:</strong> 550 баллов</p>
-                            <p class="rank-subtitle"><strong>Обязательно:</strong></p>
-                            <ul>
-                                <li>Принятие во фракцию — 25 раз</li>
-                                <li>Помощь на призыве — 15 раз</li>
-                                <li>Активная еженедельная отчётность по работе младшего состава ВК</li>
-                            </ul>
-                        </div>
-
-                        <!-- 11 -> 12 -->
-                        <div class="rank-card rank-card-danger">
-                            <p class="rank-title-danger">11 &rarr; 12 ранг (Капитан)</p>
-                            <p><strong>Повышение:</strong> На усмотрение руководящего состава (при наличии свободных мест).</p>
-                            <p><strong>Условия:</strong> Стабильный онлайн, активная помощь составу.</p>
-                        </div>
-
-                        <!-- 12 -> 13+ -->
-                        <div class="rank-card rank-card-danger" style="margin-bottom: 0;">
-                            <p class="rank-title-danger">12 &rarr; 13+ ранг (Майор / Старший состав)</p>
-                            <p><strong>Повышение:</strong> На усмотрение руководящего состава (при наличии свободных мест).</p>
-                        </div>
-
                     </div>
+
+                    <!-- ТРЕБОВАНИЯ ДЛЯ РМП -->
+                    <div id="rmp-requirements" class="dept-content">
+                        <h2 class="page-title">ТРЕБОВАНИЯ ДЛЯ ПОВЫШЕНИЯ — ИНСТРУКТОРЫ РМП</h2>
+                        <div class="content-text">
+
+                            <!-- 3 -> 4 -->
+                            <div class="rank-card">
+                                <p class="rank-title">3 &rarr; 4 ранг (Сержант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 80 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Проверка отчетов РМП — 5 раз</li>
+                                    <li>Лекция / экскурсия ВЧ — 2 раза</li>
+                                </ul>
+                            </div>
+
+                            <!-- 4 -> 5 -->
+                            <div class="rank-card">
+                                <p class="rank-title">4 &rarr; 5 ранг (Старший сержант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 120 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Проверка отчетов РМП — 10 раз</li>
+                                    <li>Принятие присяги — 3 раза</li>
+                                    <li>Проведение тренировки — 2 раза</li>
+                                </ul>
+                            </div>
+
+                            <!-- 5 -> 6 -->
+                            <div class="rank-card">
+                                <p class="rank-title">5 &rarr; 6 ранг (Старшина)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 170 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Проверка отчетов РМП — 15 раз</li>
+                                    <li>Принятие присяги — 5 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 6 -> 7 -->
+                            <div class="rank-card">
+                                <p class="rank-title">6 &rarr; 7 ранг (Прапорщик)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 230 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Проверка отчетов РМП — 20 раз</li>
+                                    <li>Принятие присяги — 8 раз</li>
+                                    <li>Спец. операции (Поставка/Рейд/ВЗА) — 1 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 7 -> 8 -->
+                            <div class="rank-card">
+                                <p class="rank-title">7 &rarr; 8 ранг (Старший прапорщик)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 300 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Проверка отчетов РМП — 25 раз</li>
+                                    <li>Принятие присяги — 12 раз</li>
+                                    <li>Проведение тренировки / Лекция / экскурсия ВЧ — 5 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 8 -> 9 -->
+                            <div class="rank-card">
+                                <p class="rank-title">8 &rarr; 9 ранг (Младший лейтенант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 380 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Пройти внутренний экзамен на знание правил приёма и работы с академией</li>
+                                    <li>Принятие присяги — 15 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 9 -> 10 -->
+                            <div class="rank-card">
+                                <p class="rank-title">9 &rarr; 10 ранг (Лейтенант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 450 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Принятие присяги — 20 раз</li>
+                                    <li>Проведение тренировки — 5 раз</li>
+                                </ul>
+                            </div>
+
+                            <!-- 10 -> 11 -->
+                            <div class="rank-card">
+                                <p class="rank-title">10 &rarr; 11 ранг (Старший лейтенант)</p>
+                                <p><strong>Необходимое количество баллов:</strong> 550 баллов</p>
+                                <p class="rank-subtitle"><strong>Обязательно:</strong></p>
+                                <ul>
+                                    <li>Принятие присяги — 25 раз</li>
+                                    <li>Активная еженедельная отчётность по работе академиков РМП</li>
+                                </ul>
+                            </div>
+
+                            <!-- 11 -> 12 -->
+                            <div class="rank-card rank-card-danger">
+                                <p class="rank-title-danger">11 &rarr; 12 ранг (Капитан)</p>
+                                <p><strong>Повышение:</strong> На усмотрение руководящего состава (при наличии свободных мест).</p>
+                                <p><strong>Условия:</strong> Стабильный онлайн, активная помощь составу.</p>
+                            </div>
+
+                            <!-- 12 -> 13+ -->
+                            <div class="rank-card rank-card-danger" style="margin-bottom: 0;">
+                                <p class="rank-title-danger">12 &rarr; 13+ ранг (Майор / Старший состав)</p>
+                                <p><strong>Повышение:</strong> На усмотрение руководящего состава (при наличии свободных мест).</p>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </article>
             </section>
 
+            <!-- Боковая панель: Таблица баллов -->
             <aside class="promotion-sidebar">
-    <article class="content-block">
-        <h3 class="sidebar-title">БАЛЛЫ</h3>
-        
-        <ul class="points-list">
-            <li><span>Принятие присяги</span><strong>20 б.</strong></li>
-            <li><span>Принятие во фракцию<br>(запись в кадровом аудите)</span><strong>15 б.</strong></li>
-            <li><span>Проведение призыва</span><strong>30 б.</strong></li>
-            <li><span>Помощь на призыве</span><strong>15 б.</strong></li>
-            <li><span>Проверка РМП / КМБ</span><strong>5 б.</strong></li>
-            <li><span>Проведение тренировки</span><strong>20 б.</strong></li>
-            <li><span>Лекция / экскурсия ВЧ</span><strong>15 б.</strong></li>
-            <li><span>Помощь: лекция / тренировка</span><strong>10 б.</strong></li>
-            <li><span>Проверка рапорта</span><strong>2 б.</strong></li>
-            <li><span>Спец. операции<br>(Поставка/Рейд/ВЗА)</span><strong>30 б.</strong></li>
-            <li><span>Отбитие территории / ВЧ</span><strong>50 б.</strong></li>
-            <li class="points-highlight"><span>Проведение ВВК<br>(Только для Мед. Роты)</span><strong>10 б.</strong></li>
-        </ul>
-    </article>
-</aside>
+                <article class="content-block">
+                    <h3 class="sidebar-title">БАЛЛЫ</h3>
+                    
+                    <!-- Список баллов для ОК -->
+                    <div id="ok-points" class="dept-content active">
+                        <ul class="points-list">
+                            <li><span>Принятие во фракцию<br>(запись в кадровом аудите)</span><strong>15 б.</strong></li>
+                            <li><span>Проведение призыва</span><strong>30 б.</strong></li>
+                            <li><span>Помощь на призыве</span><strong>15 б.</strong></li>
+                            <li><span>Проверка отчетов ВК</span><strong>5 б.</strong></li>
+                            <li><span>Проверка рапортов на увольнение</span><strong>2 б.</strong></li>
+                            <li><span>Спец. операции<br>(Поставка/Рейд/ВЗА)</span><strong>30 б.</strong></li>
+                            <li><span>Отбитие территории / ВЧ</span><strong>50 б.</strong></li>
+                            <li class="points-highlight"><span>Проведение ВВК<br>(Только для Медиков и Фельдшеров)</span><strong>10 б.</strong></li>
+                        </ul>
+                    </div>
 
+                    <!-- Список баллов для РМП -->
+                    <div id="rmp-points" class="dept-content">
+                        <ul class="points-list">
+                            <li><span>Принятие присяги</span><strong>20 б.</strong></li>
+                            <li><span>Проверка отчетов РМП<br>(академиков)</span><strong>5 б.</strong></li>
+                            <li><span>Проведение тренировки</span><strong>20 б.</strong></li>
+                            <li><span>Лекция / экскурсия ВЧ</span><strong>15 б.</strong></li>
+                            <li><span>Помощь: лекция / тренировка</span><strong>10 б.</strong></li>
+                            <li><span>Спец. операции<br>(Поставка/Рейд/ВЗА)</span><strong>30 б.</strong></li>
+                            <li><span>Отбитие территории / ВЧ</span><strong>50 б.</strong></li>
+                            <li class="points-highlight"><span>Проведение ВВК<br>(Только для Медиков и Фельдшеров)</span><strong>10 б.</strong></li>
+                        </ul>
+                    </div>
+
+                </article>
+            </aside>
+
+        </div>
+
+        <!-- Кнопка возврата -->
+        <div class="btn-back-wrapper">
+            <a href="index.html" class="btn-back">&larr; Вернуться на главную</a>
         </div>
     </main>
 
-    <div class="btn-back-wrapper">
-        <a href="index.html" class="btn-back">&larr; Вернуться на главную</a>
-    </div>
+    <!-- Подвал сайта -->
+    <footer class="site-footer">
+        <p>&copy; Вооружённые Силы РО. Все права защищены.</p>
+    </footer>
 
+    <!-- Логика переключения закладок -->
+    <script>
+        function switchDept(dept) {
+            // Скрываем все блоки
+            document.querySelectorAll('.dept-content').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Снимаем активность со всех кнопок
+            document.querySelectorAll('.btn-toggle').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Активируем нужные блоки и кнопку
+            if (dept === 'ok') {
+                document.getElementById('ok-requirements').classList.add('active');
+                document.getElementById('ok-points').classList.add('active');
+                event.target.classList.add('active');
+            } else if (dept === 'rmp') {
+                document.getElementById('rmp-requirements').classList.add('active');
+                document.getElementById('rmp-points').classList.add('active');
+                event.target.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -16,18 +16,42 @@
 
     <!-- Основное меню -->
     <main class="container">
-        <nav class="nav-grid">
 
-            <!-- 1. Собеседование (Первичное действие) -->
+        <!-- Кнопки переключения категорий -->
+        <nav class="nav-tabs-wrapper">
+            <div class="nav-tabs">
+                <button class="tab-btn" onclick="switchCategory('ok')">Метод. указания ОК</button>
+				<button class="tab-btn" onclick="switchCategory('tests-ok')">Тесты ОК</button>
+                <button class="tab-btn" onclick="switchCategory('general')">Общее</button>
+                <button class="tab-btn active" onclick="switchCategory('rmp')">Метод. указания РМП</button>
+                <button class="tab-btn" onclick="switchCategory('tests-rmp')">Тесты РМП</button>
+            </div>
+        </nav>
+
+        <!-- 1. Карточки: Методические указания ОК -->
+        <nav id="cat-ok" class="nav-grid category-content" style="display: none;">
+
             <a href="sobesedovanie.html" class="nav-card">
                 <div class="nav-icon">📋</div>
                 <div class="nav-content">
-                    <h3>Собеседование</h3>
-                    <p>Регламент и порядок приёма граждан на службу</p>
+                    <h3>Призывная комиссия</h3>
+                    <p>Регламент и порядок призыва граждан на службу</p>
                 </div>
             </a>
 
-            <!-- 2. Принятие присяги (Начало службы) -->
+            <a href="gos_volna.html" class="nav-card">
+                <div class="nav-icon">📻</div>
+                <div class="nav-content">
+                    <h3>Государственная волна</h3>
+                    <p>Правила вещания и занятия государственного эфира</p>
+                </div>
+            </a>
+
+        </nav>
+
+        <!-- 2. Карточки: Методические указания РМП -->
+        <nav id="cat-rmp" class="nav-grid category-content">
+
             <a href="prisyaga.html" class="nav-card">
                 <div class="nav-icon">📜</div>
                 <div class="nav-content">
@@ -36,7 +60,11 @@
                 </div>
             </a>
 
-            <!-- 3. Дресс-Код (Внешний вид военнослужащего) -->
+        </nav>
+
+        <!-- 3. Карточки: Общее -->
+        <nav id="cat-general" class="nav-grid category-content" style="display: none;">
+
             <a href="dresscode.html" class="nav-card">
                 <div class="nav-icon">👔</div>
                 <div class="nav-content">
@@ -45,25 +73,6 @@
                 </div>
             </a>
 
-            <!-- 4. Форма доклада (Ежедневная отчётность) -->
-            <a href="doklad.html" class="nav-card">
-                <div class="nav-icon">🎖️</div>
-                <div class="nav-content">
-                    <h3>Форма доклада</h3>
-                    <p>Регламент отчётности на вечернем построении</p>
-                </div>
-            </a>
-
-            <!-- 5. Государственная волна (Работа со СМИ/эфиром) -->
-            <a href="gos_volna.html" class="nav-card">
-                <div class="nav-icon">📻</div>
-                <div class="nav-content">
-                    <h3>Государственная волна</h3>
-                    <p>Правила вещания и занятья государственного эфира</p>
-                </div>
-            </a>
-
-            <!-- 6. Система повышения (Карьерный рост) -->
             <a href="povyshenie.html" class="nav-card">
                 <div class="nav-icon">⭐</div>
                 <div class="nav-content">
@@ -72,8 +81,73 @@
                 </div>
             </a>
 
+            <a href="doklad.html" class="nav-card">
+                <div class="nav-icon">🎖️</div>
+                <div class="nav-content">
+                    <h3>Форма доклада</h3>
+                    <p>Регламент отчётности на вечернем построении</p>
+                </div>
+            </a>
+
         </nav>
+
+        <!-- 4. Карточки: Тесты ОК -->
+        <nav id="cat-tests-ok" class="nav-grid category-content" style="display: none;">
+
+            <a href="test_ok_kadr.html" class="nav-card">
+                <div class="nav-icon">📊</div>
+                <div class="nav-content">
+                    <h3>Тест 1</h3>
+                    <p>-</p>
+                </div>
+            </a>
+
+        </nav>
+
+        <!-- 5. Карточки: Тесты РМП -->
+        <nav id="cat-tests-rmp" class="nav-grid category-content" style="display: none;">
+
+            <a href="test_ustav.html" class="nav-card">
+                <div class="nav-icon">📝</div>
+                <div class="nav-content">
+                    <h3>Тест 1</h3>
+                    <p>-</p>
+                </div>
+            </a>
+
+            <a href="test_rmp_instruktor.html" class="nav-card">
+                <div class="nav-icon">🎓</div>
+                <div class="nav-content">
+                    <h3>Тест 2</h3>
+                    <p>-</p>
+                </div>
+            </a>
+
+        </nav>
+
     </main>
+
+    <!-- Скрипт для мгновенного переключения карточек -->
+    <script>
+        function switchCategory(catName) {
+            // Скрываем все категории карточек
+            const categories = document.querySelectorAll('.category-content');
+            categories.forEach(cat => cat.style.display = 'none');
+
+            // Убираем активный класс со всех кнопок
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Показываем нужную категорию
+            const activeCategory = document.getElementById('cat-' + catName);
+            if (activeCategory) {
+                activeCategory.style.display = 'grid';
+            }
+
+            // Ставим активный класс на нажатую кнопку
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
