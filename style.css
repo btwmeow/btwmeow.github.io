@@ -67,12 +67,15 @@ body {
 /* ==========================================================================
    КАРТОЧКИ НА ГЛАВНОЙ СТРАНИЦЕ (INDEX.HTML)
    ========================================================================== */
+.category-content {
+    display: none; /* По умолчанию категории скрыты */
+}
+
 .nav-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex; /* Флексбоксы без !important для работы переноса */
+    flex-wrap: wrap;
     gap: 1.5rem;
-    width: 100%;
-    max-width: 1000px;
+    width: 1000px;
     margin: 2rem auto;
 }
 
@@ -89,6 +92,10 @@ body {
     color: var(--text-primary);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    height: 150px;
+    flex: 1 1 calc(33.333% - 1.5rem); /* Карточка занимает ~1/3 ширины */
+    min-width: 280px;                 /* Переносится при сужении */
+    box-sizing: border-box;
 }
 
 .nav-card:hover {
@@ -232,7 +239,7 @@ a.btn-back:hover {
 .rank-card {
     background-color: var(--bg-main);
     border-left: 4px solid var(--accent-gold);
-    padding: 1.25rem 1.5rem; /* 1.5rem делает нужный отступ от линии */
+    padding: 1.25rem 1.5rem;
     border-radius: 4px;
     margin-bottom: 1.25rem;
 }
@@ -244,7 +251,7 @@ a.btn-back:hover {
 /* Фикс маркированного списка внутри блока */
 .rank-card ul {
     list-style-type: disc;
-    padding-left: 1.25rem; /* Задвигает точки внутрь блока */
+    padding-left: 1.25rem;
     margin-bottom: 0;
 }
 
@@ -300,7 +307,7 @@ a.btn-back:hover {
 }
 
 .points-list li strong {
-    color: var(--accent-hover);
+    color: var(--accent-gold);
     white-space: nowrap;
 }
 
@@ -330,7 +337,7 @@ a.btn-back:hover {
 }
 
 .step-title-warning {
-    color: var(--accent-hover);
+    color: var(--accent-gold);
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 0.75rem;
@@ -373,24 +380,6 @@ a.btn-back:hover {
     border-left-color: #e74c3c;
 }
 
-/* Блоки речей и цитат */
-.speech-box {
-    background-color: var(--bg-main);
-    border-left: 3px solid var(--accent-gold);
-    border-radius: 4px;
-    padding: 1.25rem;
-    margin-top: 0.75rem;
-    font-style: italic;
-}
-
-.speech-box p {
-    margin-bottom: 0.75rem;
-}
-
-.speech-box p:last-child {
-    margin-bottom: 0;
-}
-
 /* Оформление текста самой присяги */
 .oath-box {
     background-color: var(--bg-main);
@@ -409,7 +398,7 @@ a.btn-back:hover {
 
 .speech-highlight {
     font-weight: bold;
-    color: var(--accent-hover);
+    color: var(--accent-gold);
     font-style: normal;
 }
 
@@ -448,25 +437,20 @@ a.btn-back:hover {
     object-fit: cover;
     border-radius: 4px;
     border: 1px solid var(--border-color);
-}
-
-/* Подпись под изображением */
-.dresscode-label {
-    display: block;
-    margin-top: 0.75rem;
-    font-weight: bold;
-    color: var(--accent-gold);
-    font-size: 0.95rem;
-}
-
-/* Указатель при наведении на изображение */
-.dresscode-img {
     cursor: pointer;
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .dresscode-img:hover {
     filter: brightness(1.1);
+}
+
+.dresscode-label {
+    display: block;
+    margin-top: 0.75rem;
+    font-weight: bold;
+    color: var(--accent-gold);
+    font-size: 0.95rem;
 }
 
 /* Модальное окно просмотра картинок */
@@ -526,23 +510,6 @@ a.btn-back:hover {
     to { opacity: 1; }
 }
 
-/* Исправление переменной --accent-hover */
-.step-title-warning {
-    color: var(--accent-gold);
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 0.75rem;
-}
-
-/* Сплавленный акцент для ура и баллов */
-.speech-highlight,
-.points-list li strong {
-    color: var(--accent-gold);
-    font-weight: bold;
-    font-style: normal;
-}
-
-/* Предупреждающая плашка */
 .info-note-warning {
     background-color: var(--bg-main);
     border-left: 3px solid #f39c12;
@@ -557,13 +524,13 @@ a.btn-back:hover {
    НАВИГАЦИОННЫЕ ТАБЫ / ПЕРЕКЛЮЧАТЕЛИ (5 КНОПОК)
    ========================================================================== */
 .nav-tabs-wrapper {
-	width: 1000px;
+    max-width: 1000px;
     margin: 0 auto 1.5rem auto;
 }
 
 .nav-tabs {
-    width: 100%; /* Гарантирует, что блок не будет сжиматься */
-    box-sizing: border-box; /* Чтобы padding не раздувал ширину */
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -573,16 +540,12 @@ a.btn-back:hover {
     padding: 0.6rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-	
 }
 
 .tab-btn {
-    /* Фиксированная ширина для 5 кнопок */
-	flex: 1; /* Каждая кнопка занимает ровно 1/5 часть */
-    width: 180px;
+    flex: 1;
     padding: 0.65rem 0.25rem;
-	text-align: center;
-    
+    text-align: center;
     color: var(--text-secondary);
     background: transparent;
     font-weight: bold;
@@ -592,7 +555,6 @@ a.btn-back:hover {
     border: 1px solid transparent;
     cursor: pointer;
     transition: all 0.25s ease;
-    text-align: center;
     white-space: nowrap;
 }
 
@@ -609,16 +571,18 @@ a.btn-back:hover {
     box-shadow: 0 2px 10px var(--accent-gold-glow);
 }
 
-/* Адаптируемость для планшетов и телефонов */
 @media (max-width: 980px) {
+    .nav-tabs {
+        flex-wrap: wrap;
+    }
     .tab-btn {
-        width: 30%; /* По 3 кнопки в ряд */
+        flex: 1 1 30%;
     }
 }
 
 @media (max-width: 600px) {
     .tab-btn {
-        width: 100%; /* По 1 кнопке во всю ширину */
+        flex: 1 1 100%;
     }
 }
 
@@ -675,4 +639,249 @@ a.btn-back:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
     background: #e5c158;
+}
+
+/* ==========================================================================
+   ИЕРАРХИЯ С ДВУМЯ ВЕТКАМИ
+   ========================================================================== */
+.hierarchy-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.hierarchy-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 450px;
+}
+
+.hierarchy-split-arrow {
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 0.5rem 0;
+}
+
+.hierarchy-branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+}
+
+.hierarchy-branch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.branch-header {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-gold);
+    padding-bottom: 0.3rem;
+    width: 100%;
+}
+
+.hierarchy-card {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.hierarchy-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-gold);
+}
+
+.hierarchy-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin-bottom: 0.2rem;
+}
+
+.hierarchy-role {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.hierarchy-arrow {
+    color: var(--accent-gold);
+    font-size: 1.1rem;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.hierarchy-card.level-command {
+    border-left: 4px solid #e74c3c;
+}
+
+.hierarchy-card.level-command .hierarchy-role {
+    color: var(--accent-gold);
+}
+
+.hierarchy-card.level-head {
+    border-left: 4px solid var(--accent-gold);
+}
+
+.hierarchy-card.level-deputy {
+    border-left: 4px solid #f39c12;
+}
+
+.hierarchy-card.level-senior {
+    border-left: 4px solid #2980b9;
+}
+
+.hierarchy-card.level-instructor {
+    border-left: 4px solid #27ae60;
+}
+
+@media (max-width: 768px) {
+    .hierarchy-branches {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Стили для статьи и списков */
+.content-card {
+    background: #1e1e24;
+    border-radius: 12px;
+    padding: 24px;
+    color: #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.content-card h2 {
+    margin-top: 0;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+/* Нумерованный список шагов */
+.steps-list {
+    list-style: none;
+    counter-reset: step-counter;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.steps-list > li {
+    position: relative;
+    counter-increment: step-counter;
+    background: #282830;
+    border-left: 4px solid #4f46e5;
+    padding: 16px 20px 16px 55px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+}
+
+.steps-list > li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    background: #4f46e5;
+    color: #fff;
+    font-weight: bold;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* ==========================================
+   Стили рамок для форм отчетов
+   ========================================== */
+
+.step-desc {
+    margin-bottom: 12px;
+    color: #b0b0ba;
+}
+
+.form-card {
+    background-color: #141417;
+    border: 1px solid var(--accent-gold, #d4af37);
+    border-left: 4px solid var(--accent-gold, #d4af37);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 15px 0 25px 0;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.form-header {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: var(--accent-gold, #d4af37);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #2a2a30;
+    margin: 0;
+}
+
+/* Подсписки с маркерами */
+.steps-list ul {
+    margin-top: 10px;
+    margin-bottom: 0;
+    padding-left: 20px;
+    color: #b0b0ba;
+}
+
+.steps-list ul li {
+    margin-bottom: 6px;
+}
+
+/* Оформление кода/тегов */
+code {
+    background: #18181c;
+    color: #38bdf8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
 }

@@ -20,17 +20,16 @@
         <!-- Кнопки переключения категорий -->
         <nav class="nav-tabs-wrapper">
             <div class="nav-tabs">
-                <button class="tab-btn" onclick="switchCategory('ok')">Метод. указания ОК</button>
-				<button class="tab-btn" onclick="switchCategory('tests-ok')">Тесты ОК</button>
-                <button class="tab-btn active" onclick="switchCategory('general')">Общее</button>
-                <button class="tab-btn" onclick="switchCategory('rmp')">Метод. указания РМП</button>
-                <button class="tab-btn" onclick="switchCategory('tests-rmp')">Тесты РМП</button>
+                <button class="tab-btn" onclick="switchCategory('ok', event)">Метод. указания ОК</button>
+                <button class="tab-btn" onclick="switchCategory('rmp', event)">Метод. указания РМП</button>
+                <button class="tab-btn active" onclick="switchCategory('general', event)">Общее</button>
+                <button class="tab-btn" onclick="switchCategory('tests-ok', event)">Тесты ОК</button>
+                <button class="tab-btn" onclick="switchCategory('tests-rmp', event)">Тесты РМП</button>
             </div>
         </nav>
 
         <!-- 1. Карточки: Методические указания ОК -->
         <nav id="cat-ok" class="nav-grid category-content" style="display: none;">
-
             <a href="sobesedovanie.html" class="nav-card">
                 <div class="nav-icon">📋</div>
                 <div class="nav-content">
@@ -47,11 +46,17 @@
                 </div>
             </a>
 
+            <a href="otchety_ok.html" class="nav-card">
+                <div class="nav-icon">📑</div>
+                <div class="nav-content">
+                    <h3>Проверка отчетов</h3>
+                    <p>Порядок проверки и принятия отчетов военнослужащих ВК</p>
+                </div>
+            </a>        
         </nav>
 
         <!-- 2. Карточки: Методические указания РМП -->
         <nav id="cat-rmp" class="nav-grid category-content" style="display: none;">
-
             <a href="prisyaga.html" class="nav-card">
                 <div class="nav-icon">📜</div>
                 <div class="nav-content">
@@ -60,10 +65,40 @@
                 </div>
             </a>
 
+            <a href="lectures.html" class="nav-card">
+                <div class="nav-icon">📚</div>
+                <div class="nav-content">
+                    <h3>Проведение лекций</h3>
+                    <p>Регламент и правила чтения лекций для состава</p>
+                </div>
+            </a>
+
+            <a href="training.html" class="nav-card">
+                <div class="nav-icon">🏋️‍♂️</div>
+                <div class="nav-content">
+                    <h3>Проведение тренировок</h3>
+                    <p>Порядок организации и фиксации тренировок</p>
+                </div>
+            </a>
+
+            <a href="otchety_rmp.html" class="nav-card">
+                <div class="nav-icon">📑</div>
+                <div class="nav-content">
+                    <h3>Проверка отчетов РМП</h3>
+                    <p>Порядок проверки и принятия отчетов военнослужащих РМП</p>
+                </div>
+            </a>
         </nav>
 
         <!-- 3. Карточки: Общее -->
-        <nav id="cat-general" class="nav-grid category-content">
+        <nav id="cat-general" class="nav-grid category-content" style="display: flex;">
+            <a href="hierarchy.html" class="nav-card">
+                <div class="nav-icon">👑</div>
+                <div class="nav-content">
+                    <h3>Иерархия</h3>
+                    <p>Структура подчинения и руководящий состав</p>
+                </div>
+            </a>
 
             <a href="dresscode.html" class="nav-card">
                 <div class="nav-icon">👔</div>
@@ -76,7 +111,7 @@
             <a href="povyshenie.html" class="nav-card">
                 <div class="nav-icon">⭐</div>
                 <div class="nav-content">
-                    <h3>Система повышения ВА</h3>
+                    <h3>Система повышения</h3>
                     <p>Требования для продвижения по службе и баллы</p>
                 </div>
             </a>
@@ -88,12 +123,10 @@
                     <p>Регламент отчётности на вечернем построении</p>
                 </div>
             </a>
-
         </nav>
 
         <!-- 4. Карточки: Тесты ОК -->
         <nav id="cat-tests-ok" class="nav-grid category-content" style="display: none;">
-
             <a href="test_ok_kadr.html" class="nav-card">
                 <div class="nav-icon">📊</div>
                 <div class="nav-content">
@@ -101,12 +134,10 @@
                     <p>-</p>
                 </div>
             </a>
-
         </nav>
 
         <!-- 5. Карточки: Тесты РМП -->
         <nav id="cat-tests-rmp" class="nav-grid category-content" style="display: none;">
-
             <a href="test_ustav.html" class="nav-card">
                 <div class="nav-icon">📝</div>
                 <div class="nav-content">
@@ -122,14 +153,13 @@
                     <p>-</p>
                 </div>
             </a>
-
         </nav>
 
     </main>
 
-    <!-- Скрипт для мгновенного переключения карточек -->
+    <!-- Скрипт переключения карточек -->
     <script>
-        function switchCategory(catName) {
+        function switchCategory(catName, e) {
             // Скрываем все категории карточек
             const categories = document.querySelectorAll('.category-content');
             categories.forEach(cat => cat.style.display = 'none');
@@ -138,14 +168,16 @@
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Показываем нужную категорию
+            // Показываем нужную категорию через Flexbox
             const activeCategory = document.getElementById('cat-' + catName);
             if (activeCategory) {
-                activeCategory.style.display = 'grid';
+                activeCategory.style.display = 'flex';
             }
 
             // Ставим активный класс на нажатую кнопку
-            event.currentTarget.classList.add('active');
+            if (e && e.currentTarget) {
+                e.currentTarget.classList.add('active');
+            }
         }
     </script>
 
