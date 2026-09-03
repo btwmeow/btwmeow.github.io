@@ -193,6 +193,7 @@ code {
     display: grid;
     grid-template-columns: 1fr 320px;
     gap: 2rem;
+    align-items: start;
 }
 
 @media (max-width: 900px) {
@@ -270,7 +271,6 @@ a.btn-back:hover {
 
 /* Позиционирование и ширина самого сайдбара */
 .promotion-sidebar {
-    width: 320px;
     flex-shrink: 0;
     position: sticky;
     top: 2rem;
