@@ -1,0 +1,274 @@
+/* ==========================================================================
+   СБРОС СТИЛЕЙ И ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Палитра в стиле милитари / официальный документ */
+    --bg-color: #121915;          /* Тёмно-зелёный глубокий фон */
+    --card-bg: #1c2620;           /* Цвет блоков и карточек */
+    --accent-gold: #d4af37;       /* Золотой акцент для заголовков и рамок */
+    --accent-hover: #f1c40f;      /* Яркий золотой при наведении */
+    --text-main: #e0e6e3;         /* Светлый основной текст */
+    --text-muted: #8e9b93;        /* Вспомогательный серый текст */
+    --border-color: #2e3d34;      /* Цвет границ */
+    --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   ШАПКА И ПОДВАЛ (HEADER & FOOTER)
+   ========================================================================== */
+.site-header {
+    background-color: var(--card-bg);
+    border-bottom: 2px solid var(--accent-gold);
+    text-align: center;
+    padding: 2rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+}
+
+.site-title {
+    color: var(--accent-gold);
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.site-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.site-footer {
+    margin-top: auto;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   ОСНОВНОЙ КОНТЕЙНЕР
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Расширили до 1200px, чтобы 2 колонки не сминались */
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   ГЛАВНАЯ СТРАНИЦА: ЦЕНТРИРОВАННАЯ И АДАПТИВНАЯ СЕТКА КНОПОК
+   ========================================================================== */
+.nav-grid {
+    display: flex;
+    flex-wrap: wrap;             /* Перенос на новую строку */
+    justify-content: center;     /* Центрирует кнопки в каждом ряду */
+    align-content: center;
+    gap: 1.25rem;                /* Одинаковый зазор между кнопками */
+    width: 100%;
+    max-width: 900px;
+    margin: auto;                /* Идеальное центрирование сетки по центру экрана */
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    text-decoration: none;
+    
+    font-size: clamp(0.85rem, 1.1vw, 1.05rem);
+    font-weight: 600;
+    padding: 1rem;
+    
+    flex: 0 0 clamp(200px, 28vw, 270px);
+    height: clamp(100px, 14vw, 130px);
+    
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-button:hover {
+    background-color: var(--border-color);
+    color: var(--accent-hover);
+    border-color: var(--accent-gold);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   ВНУТРЕННИЕ СТРАНИЦЫ
+   ========================================================================== */
+.content-block {
+    width: 100%;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 2rem;
+    margin-bottom: 2rem; /* Уменьшили 6rem до 2rem, чтобы боковая колонка не улетала вниз */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-title {
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.content-text {
+    font-size: 1rem;
+    color: var(--text-main);
+}
+
+.content-text p {
+    margin-bottom: 1rem;
+}
+
+.content-text ul, .content-text ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content-text li {
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   ФИКСИРОВАННАЯ КНОПКА "ВЕРНУТЬСЯ НА ГЛАВНУЮ" (СПРАВА СНИЗУ)
+   ========================================================================== */
+.btn-back-wrapper {
+    position: fixed !important;
+    bottom: 2rem !important;
+    right: 2rem !important;
+    z-index: 99999 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+a.btn-back {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--card-bg) !important;
+    color: var(--accent-gold) !important;
+    text-decoration: none !important;
+    font-family: var(--font-family) !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    padding: 0.85rem 1.75rem !important;
+    border: 2px solid var(--accent-gold) !important;
+    border-radius: 50px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    white-space: nowrap !important;
+}
+
+a.btn-back:hover {
+    background-color: var(--accent-gold) !important;
+    color: var(--bg-color) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5) !important;
+}
+
+/* ==========================================================================
+   ДВУХКОЛОНОЧНЫЙ МАКЕТ ДЛЯ СТРАНИЦЫ ПОВЫШЕНИЯ
+   ========================================================================== */
+.promotion-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.promotion-main {
+    flex: 1;
+    min-width: 0; /* Предотвращает переполнение flex-контейнера */
+}
+
+.promotion-sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 2rem; /* Отступ от верха экрана при прокрутке */
+    margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ
+   ========================================================================== */
+@media (max-width: 900px) {
+    .promotion-layout {
+        flex-direction: column;
+    }
+
+    .promotion-sidebar {
+        width: 100%;
+        position: static; /* На маленьких экранах панель с баллами встает обычным блоком */
+    }
+}
+
+@media (max-width: 600px) {
+    .site-title {
+        font-size: 1.4rem;
+    }
+
+    .nav-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-button {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 80px;
+    }
+
+    .btn-back-wrapper {
+        bottom: 1rem !important;
+        right: 1rem !important;
+    }
+
+    a.btn-back {
+        padding: 0.65rem 1.25rem !important;
+        font-size: 0.85rem !important;
+    }
+}
