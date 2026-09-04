@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График призывов — ВК ВС РО</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .time-box {
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            border-top: 3px solid var(--accent-gold, #d4af37);
+            padding: 15px 10px;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header class="site-header">
+        <h1 class="site-title">Военный Комиссариат ВС РО</h1>
+        <p class="site-subtitle">График проведения призывных мероприятий</p>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <article class="content-block">
+            <h2 class="page-title">ГРАФИК ПРОВЕДЕНИЯ ПРИЗЫВОВ</h2>
+            
+            <div class="content-text">
+                
+                <section class="step-section">
+                    <h3 class="step-title">Обязательные призывные мероприятия</h3>
+                    <p>Проведение призывных мероприятий осуществляется строго по следующему временному регламенту:</p>
+                    
+                    <div class="schedule-grid">
+                        <div class="time-box">08:00</div>
+                        <div class="time-box">12:00</div>
+                        <div class="time-box">16:00</div>
+                        <div class="time-box">20:00</div>
+                    </div>
+                </section>
+
+                <section class="step-section">
+                    <h3 class="step-title-warning">Дополнительные призывы</h3>
+                    <div class="speech-box">
+                        По решению и усмотрению Старшего Состава (СС) могут проводиться дополнительные призывы вне основного расписания при наличии высокой активности и потребности в пополнении личного состава.
+                    </div>
+                </section>
+
+            </div>
+        </article>
+
+        <!-- Кнопка возврата -->
+        <div class="btn-back-wrapper">
+            <a href="index.html" class="btn-back">&larr; Вернуться на главную</a>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; Вооружённые Силы РО. Все права защищены.</p>
+    </footer>
+
+</body>
+</html>

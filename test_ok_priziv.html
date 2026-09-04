@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест ОК: Порядок проведения призывной комиссии — ВК ВС РО</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg, #1e1e1e);
+            border: 2px solid var(--accent-gold, #d4af37);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: var(--text-primary, #ffffff);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--accent-gold, #d4af37);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #2b2b2b;
+            color: #fff;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-gold, #d4af37);
+            outline: none;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--accent-gold, #d4af37);
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #b59228;
+        }
+
+        .question-card {
+            background-color: #2b2b2b;
+            border-left: 4px solid var(--accent-gold, #d4af37);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .question-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .option-label input[type="radio"] {
+            accent-color: var(--accent-gold, #d4af37);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* Окно результатов */
+        .result-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .user-info-bar {
+            background-color: #2b2b2b;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            border: 1px solid #444;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .user-info-item {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .user-info-item span {
+            color: var(--accent-gold, #d4af37);
+        }
+
+        .score-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .status-passed {
+            background-color: #2e7d32;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(46, 125, 50, 0.5);
+        }
+
+        .status-failed {
+            background-color: #c62828;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(198, 40, 40, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <h1 class="site-title">Военный Комиссариат ВС РО</h1>
+        <p class="site-subtitle">Аттестация Отдела Кадров (ОК) — Порядок проведения призывной комиссии</p>
+    </header>
+
+    <main class="container">
+        <div class="test-container">
+
+            <!-- ШАГ 1: Ввод данных призывника/сотрудника -->
+            <div id="step-registration">
+                <h2 style="text-align: center; margin-bottom: 20px; color: var(--accent-gold, #d4af37);">Регистрация перед тестированием</h2>
+                <form id="form-user" onsubmit="startTest(event)">
+                    <div class="form-group">
+                        <label for="input-nickname">1. Никнейм (Имя Фамилия):</label>
+                        <input type="text" id="input-nickname" placeholder="Пример: Илья Матвиенков" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-static">2. Статический ID:</label>
+                        <input type="text" id="input-static" placeholder="Пример: 14752" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-discord">3. Username в Discord:</label>
+                        <input type="text" id="input-discord" placeholder="Пример: @ilya_suvorov" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Перейти к тестированию</button>
+                </form>
+            </div>
+
+            <!-- ШАГ 2: Блок вопросов (скрыт по умолчанию) -->
+            <div id="step-quiz" class="hidden">
+                <h2 style="text-align: center; margin-bottom: 25px; color: var(--accent-gold, #d4af37);">Тестирование Отдела Кадров</h2>
+                <form id="form-quiz" onsubmit="submitQuiz(event)">
+                    
+                    <!-- Вопрос 1 -->
+                    <div class="question-card">
+                        <div class="question-title">1. Какое главное требование к документам призывника перед началом проверки?</div>
+                        <label class="option-label"><input type="radio" name="q1" value="0" required> Попросить просто назвать паспортные данные на слух</label>
+                        <label class="option-label"><input type="radio" name="q1" value="1"> Сверить паспорт, медицинскую карту и лицензии через передачи по RP (OOC/IC)</label>
+                        <label class="option-label"><input type="radio" name="q1" value="0"> Наличие только лицензии на оружие</label>
+                    </div>
+
+                    <!-- Вопрос 2 -->
+                    <div class="question-card">
+                        <div class="question-title">2. Что обязан сделать сотрудник ОК первым делом при начале работы с гражданином на призыве?</div>
+                        <label class="option-label"><input type="radio" name="q2" value="0"> Сразу выдать форму и погоны</label>
+                        <label class="option-label"><input type="radio" name="q2" value="1"> Поздроваться, представиться (должность, звание, фамилия) и запросить документы</label>
+                        <label class="option-label"><input type="radio" name="q2" value="0"> Отправить на прохождение ВВК без проверки личности</label>
+                    </div>
+
+                    <!-- Вопрос 3 -->
+                    <div class="question-card">
+                        <div class="question-title">3. Какова роль медицинского работника (ВВК) на призывной комиссии?</div>
+                        <label class="option-label"><input type="radio" name="q3" value="1"> Проведение медицинского освидетельствования и выдача заключения о годности к службе</label>
+                        <label class="option-label"><input type="radio" name="q3" value="0"> Проверка наличия розыска и судимостей</label>
+                        <label class="option-label"><input type="radio" name="q3" value="0"> Выдача воинского билета</label>
+                    </div>
+
+                    <!-- Вопрос 4 -->
+                    <div class="question-card">
+                        <div class="question-title">4. Что является основанием для моментального отказа гражданину в прохождении призыва?</div>
+                        <label class="option-label"><input type="radio" name="q4" value="0"> Отсутствие опыта работы в госслужбах</label>
+                        <label class="option-label"><input type="radio" name="q4" value="1"> Наличие активного розыска, судимостей или непогашенных штрафов/черного списка</label>
+                        <label class="option-label"><input type="radio" name="q4" value="0"> Нестандартный внешний вид прически</label>
+                    </div>
+
+                    <!-- Вопрос 5 -->
+                    <div class="question-card">
+                        <div class="question-title">5. Как проверяются термины и знания правил у призывника во время проведения комиссии?</div>
+                        <label class="option-label"><input type="radio" name="q5" value="0"> Путем написания вопросов в чат без соблюдения IC/OOC разделений</label>
+                        <label class="option-label"><input type="radio" name="q5" value="1"> Путем проверки RP-грамотности, соблюдения чатов (IC/OOC) и психологического теста</label>
+                        <label class="option-label"><input type="radio" name="q5" value="0"> Проверка знаний правил призыва не проводится вообще</label>
+                    </div>
+
+                    <!-- Вопрос 6 -->
+                    <div class="question-card">
+                        <div class="question-title">6. Что обязателен сделать сотрудник ОК сразу после успешного принятия новобранца?</div>
+                        <label class="option-label"><input type="radio" name="q6" value="1"> Занести данные новобранца в Кадровый Аудит (дискорд/реестр) и передать Инструкторам РМП</label>
+                        <label class="option-label"><input type="radio" name="q6" value="0"> Отпустить новобранца гулять по территории ВЧ</label>
+                        <label class="option-label"><input type="radio" name="q6" value="0"> Выдать ему табельное оружие и отправлять на КПП</label>
+                    </div>
+
+                    <!-- Вопрос 7 -->
+                    <div class="question-card">
+                        <div class="question-title">7. Разрешено ли сотруднику ОК принимать призывника, если тот находится в состоянии алкогольного/наркотического опьянения?</div>
+                        <label class="option-label"><input type="radio" name="q7" value="0"> Да, если он оплатит штраф</label>
+                        <label class="option-label"><input type="radio" name="q7" value="1"> Категорически запрещено (выдается отказ до протрезвления)</label>
+                        <label class="option-label"><input type="radio" name="q7" value="0"> Да, с разрешения проводящего призыв</label>
+                    </div>
+
+                    <!-- Вопрос 8 -->
+                    <div class="question-card">
+                        <div class="question-title">8. В каком случае призывная комиссия считается официально завершенной?</div>
+                        <label class="option-label"><input type="radio" name="q8" value="0"> Когда закончились бланки документов</label>
+                        <label class="option-label"><input type="radio" name="q8" value="1"> После окончания отведенного времени, подачи гос. волны об осте и внесения всех принятых в реестр</label>
+                        <label class="option-label"><input type="radio" name="q8" value="0"> Когда ушел старший по званию</label>
+                    </div>
+
+                    <!-- Вопрос 9 -->
+                    <div class="question-card">
+                        <div class="question-title">9. Кто имеет право вносить корректировки в порядок проведения призыва?</div>
+                        <label class="option-label"><input type="radio" name="q9" value="0"> Любой сотрудник Отдела Кадров</label>
+                        <label class="option-label"><input type="radio" name="q9" value="1"> Руководство Военного Комиссариата и Генералитет</label>
+                        <label class="option-label"><input type="radio" name="q9" value="0"> Руководство РМП</label>
+                    </div>
+
+                    <!-- Вопрос 10 -->
+                    <div class="question-card">
+                        <div class="question-title">10. Что делает сотрудник ОК, если гражданин веде себя неадекватно или провоцирует сотрудников на призыве?</div>
+                        <label class="option-label"><input type="radio" name="q10" value="0"> Начинает стрелять на поражение без предупреждения</label>
+                        <label class="option-label"><input type="radio" name="q10" value="1"> Отказывает в призыве и вызывает Военную Полицию / Охрану для вывода гражданина</label>
+                        <label class="option-label"><input type="radio" name="q10" value="0"> Игнорирует и всё равно принимают во фракцию</label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Завершить тест и узнать результат</button>
+                </form>
+            </div>
+
+            <!-- ШАГ 3: Окно результатов (скрыто по умолчанию) -->
+            <div id="step-result" class="hidden">
+                <div class="result-box">
+                    <h2 style="color: var(--accent-gold, #d4af37); margin-bottom: 20px;">Результат аттестации</h2>
+
+                    <!-- Данные пользователя -->
+                    <div class="user-info-bar">
+                        <div class="user-info-item">Ник: <span id="res-nickname">-</span></div>
+                        <div>|</div>
+                        <div class="user-info-item">Статик: <span id="res-static">-</span></div>
+                        <div>|</div>
+                        <div class="user-info-item">Discord: <span id="res-discord">-</span></div>
+                    </div>
+
+                    <!-- Баллы -->
+                    <div class="score-display">
+                        <span id="res-score">0</span> / <span id="res-total">10</span> баллов
+                        <div style="font-size: 1.2rem; color: #aaa; margin-top: 5px;">(<span id="res-percent">0</span>%)</div>
+                    </div>
+
+                    <!-- Статус -->
+                    <div id="res-status-badge" class="status-badge">
+                        -
+                    </div>
+
+                    <div style="margin-top: 35px;">
+                        <a href="index.html" class="btn-submit" style="text-decoration: none; display: inline-block; width: auto; padding: 10px 25px;">Вернуться на главную</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Данные пользователя
+        let userData = {
+            nickname: '',
+            staticId: '',
+            discord: ''
+        };
+
+        // Переход от шага 1 к шагу 2
+        function startTest(event) {
+            event.preventDefault();
+            
+            userData.nickname = document.getElementById('input-nickname').value.trim();
+            userData.staticId = document.getElementById('input-static').value.trim();
+            userData.discord = document.getElementById('input-discord').value.trim();
+
+            document.getElementById('step-registration').classList.add('hidden');
+            document.getElementById('step-quiz').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Подсчет результатов
+        function submitQuiz(event) {
+            event.preventDefault();
+
+            const totalQuestions = 10;
+            let score = 0;
+
+            const form = document.getElementById('form-quiz');
+            const formData = new FormData(form);
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = formData.get('q' + i);
+                if (answer === '1') {
+                    score++;
+                }
+            }
+
+            const percent = Math.round((score / totalQuestions) * 100);
+            const isPassed = percent >= 80;
+
+            // Вывод данных
+            document.getElementById('res-nickname').textContent = userData.nickname;
+            document.getElementById('res-static').textContent = userData.staticId;
+            document.getElementById('res-discord').textContent = userData.discord;
+
+            document.getElementById('res-score').textContent = score;
+            document.getElementById('res-total').textContent = totalQuestions;
+            document.getElementById('res-percent').textContent = percent;
+
+            const badge = document.getElementById('res-status-badge');
+            if (isPassed) {
+                badge.textContent = 'СДАЛ';
+                badge.className = 'status-badge status-passed';
+            } else {
+                badge.textContent = 'НЕ СДАЛ';
+                badge.className = 'status-badge status-failed';
+            }
+
+            // Переключение экранов
+            document.getElementById('step-quiz').classList.add('hidden');
+            document.getElementById('step-result').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
